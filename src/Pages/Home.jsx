@@ -1,8 +1,23 @@
 import { NavLink } from "react-router-dom";
 import user from "../assets/images/user.png";
-import acc from "../assets/icons/accounts.png"
+import acc from "../assets/icons/accounts.png";
+import JobCard from "../components/JobCard";
+import { useEffect, useState } from "react";
 
 const Home = () => {
+  const [jobs, setJobs] = useState([]);
+  const [jobLength, setJobLength] = useState(4);
+  const handleAllJobs = () => {
+    setJobLength(jobs.length);
+  };
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch("jobs.json");
+      const data = await res.json();
+      setJobs(data);
+    };
+    fetchData();
+  }, []);
   return (
     <main>
       <section className="text-black bg-cover bg-center py-20 my-5">
@@ -43,37 +58,56 @@ const Home = () => {
       </section>
       <section className="my-16">
         <div className="flex my-10 flex-col items-center justify-center gap-4">
-            <h3 className="text-4xl font-bold">Job Category List</h3>
-            <p>Explore thousands of job opportunities with all the information you need. Its your future</p>
+          <h3 className="text-4xl font-bold">Job Category List</h3>
+          <p>
+            Explore thousands of job opportunities with all the information you
+            need. Its your future
+          </p>
         </div>
         <div className="flex flex-col lg:flex-row my-5 items-center justify-center gap-5">
-            <div className="p-5 w-full flex flex-col gap-3 border border-purple-500 rounded">
-                <img className="w-fit" src={acc} alt="" />
-                 <h3>Account & Finance</h3>
-                 <p>300 Jobs Available</p>
-            </div>
-            <div className="p-5 w-full flex flex-col gap-3 border border-purple-500 rounded">
-                <img className="w-fit" src={acc} alt="" />
-                 <h3>Creative Design</h3>
-                 <p>200 Jobs Available</p>
-            </div>
-            <div className="p-5 w-full flex flex-col gap-3 border border-purple-500 rounded">
-                <img className="w-fit" src={acc} alt="" />
-                 <h3>Marketing & Sales</h3>
-                 <p>400 Jobs Available</p>
-            </div>
-            <div className="p-5 w-full flex flex-col gap-3 border border-purple-500 rounded">
-                <img className="w-fit" src={acc} alt="" />
-                 <h3>Engineering Job</h3>
-                 <p>500 Jobs Available</p>
-            </div>
+          <div className="p-5 w-full flex flex-col gap-3 border border-purple-500 rounded">
+            <img className="w-fit" src={acc} alt="" />
+            <h3>Account & Finance</h3>
+            <p>300 Jobs Available</p>
+          </div>
+          <div className="p-5 w-full flex flex-col gap-3 border border-purple-500 rounded">
+            <img className="w-fit" src={acc} alt="" />
+            <h3>Creative Design</h3>
+            <p>200 Jobs Available</p>
+          </div>
+          <div className="p-5 w-full flex flex-col gap-3 border border-purple-500 rounded">
+            <img className="w-fit" src={acc} alt="" />
+            <h3>Marketing & Sales</h3>
+            <p>400 Jobs Available</p>
+          </div>
+          <div className="p-5 w-full flex flex-col gap-3 border border-purple-500 rounded">
+            <img className="w-fit" src={acc} alt="" />
+            <h3>Engineering Job</h3>
+            <p>500 Jobs Available</p>
+          </div>
         </div>
       </section>
       <section className="mb-16">
-      <div className="flex my-10 flex-col items-center justify-center gap-4">
-            <h3 className="text-4xl font-bold">Featured Jobs</h3>
-            <p>Explore thousands of job opportunities with all the information you need. Its your future</p>
+        <div className="flex my-10 flex-col items-center justify-center gap-4">
+          <h3 className="text-4xl font-bold">Featured Jobs</h3>
+          <p>
+            Explore thousands of job opportunities with all the information you
+            need. Its your future
+          </p>
         </div>
+        <div className="grid lg:grid-cols-2 gap-6">
+          {jobs.slice(0, jobLength).map((job) => (
+            <JobCard key={job.id} job={job}></JobCard>
+          ))}
+        </div>
+        <button
+          onClick={handleAllJobs}
+          className={`flex btn my-8 btn-primary w-fit mx-auto items-center justify-center ${
+            jobLength === jobs.length && "hidden"
+          }`}
+        >
+          See All Jobs
+        </button>
       </section>
     </main>
   );
