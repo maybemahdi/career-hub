@@ -4,6 +4,7 @@ import { BiTask } from "react-icons/bi";
 import { FaSquarePhone } from "react-icons/fa6";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
+import { saveJob } from "../utils/localStorage";
 
 const JobDetail = () => {
   const jobs = useLoaderData();
@@ -23,6 +24,9 @@ const JobDetail = () => {
     educational_requirements,
     experiences,
   } = selectedJob;
+  const handleApply = (job) => {
+    saveJob(job);
+  };
   return (
     <div>
       <div>
@@ -77,16 +81,22 @@ const JobDetail = () => {
             <hr />
             <div className="flex flex-col gap-3 my-2">
               <p className="flex items-center gap-2">
-              <FaSquarePhone /> Phone : {contact_information.phone}{" "}
+                <FaSquarePhone /> Phone : {contact_information.phone}{" "}
               </p>
               <p className="flex items-center gap-2">
-              <MdMarkEmailUnread /> Email : {contact_information.email}
+                <MdMarkEmailUnread /> Email : {contact_information.email}
               </p>
               <p className="flex items-center gap-2">
-              <IoLocationOutline /> Address : {contact_information.address.split(',')[1]}
+                <IoLocationOutline /> Address :{" "}
+                {contact_information.address.split(",")[1]}
               </p>
             </div>
-            <button className="btn btn-accent mt-4 w-full px-4 py-3">Apply Now</button>
+            <button
+              onClick={() => handleApply(selectedJob)}
+              className="btn btn-accent mt-4 w-full px-4 py-3"
+            >
+              Apply Now
+            </button>
           </div>
         </div>
       </div>

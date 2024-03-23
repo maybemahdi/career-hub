@@ -102,7 +102,7 @@ const Home = () => {
         </div>
         <button
           onClick={handleAllJobs}
-          className={`flex btn my-8 btn-primary w-fit mx-auto items-center justify-center ${
+          className={`flex btn my-10 btn-primary w-fit mx-auto items-center justify-center ${
             jobLength === jobs.length && "hidden"
           }`}
         >

@@ -24,7 +24,7 @@ const Nav = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-md dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box"
+              className="menu menu-md font-semibold dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box"
             >
               <li>
                 <NavLink to="/">Home</NavLink>
@@ -39,7 +39,7 @@ const Nav = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal gap-5 text-base px-1">
+          <ul className="menu menu-horizontal font-semibold gap-5 text-base px-1">
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
@@ -50,6 +50,7 @@ const Nav = () => {
         </div>
         <div className="navbar-end space-x-3">
           <NavLink
+          to='/'
             className="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             data-rounded="rounded-md"
             data-primary="blue-600"
